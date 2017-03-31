@@ -12,13 +12,22 @@ const PORT = 3333;
 
 const Schema = buildSchema(schema);
 
-
 let count = 0;
+let list = [{id: Math.random().toString(36), uuid: 0, value: 0}];
 
 const rootValue = {
-  count: count,
-  list: [{id: 0, uuid: 0, value: 0}],
-  updateCount: ({ by }) => count += by,
+  count: () => count,
+  list: () => list,
+  updateCount: ({ by }) => {count += by; return count},
+  addItem: () => {
+    const newItem = {id: Math.random().toString(36), uuid: 0, value: 0};
+    list.push(newItem);
+    return (newItem);
+  },
+  editSecondItem: () => {
+    list[1].value += 1;
+    return list;
+  },
 };
 
 app.use(bodyParser.json({ type: 'application/json' }));
@@ -29,7 +38,8 @@ app.use('/graphql', (req, res) => {
     req.body.query || req.body.mutation,
     rootValue,
     {},
-    req.body.variables
+    req.body.variables,
+    req.body.operationName
   )
   .then((result) => {
     res.send(JSON.stringify(result, null, 2));
