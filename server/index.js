@@ -28,6 +28,11 @@ const rootValue = {
     list[1].value += 1;
     return list;
   },
+  removeItem: () => {
+    const removedId = list[list.length - 1].id;
+    list.splice(-1,1);
+    return removedId;
+  },
 };
 
 app.use(bodyParser.json({ type: 'application/json' }));

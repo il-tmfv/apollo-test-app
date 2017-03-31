@@ -10,14 +10,9 @@ const query = gql`query TestQuery {
     }
 }`;
 
-const mutation = gql`mutation AddItem { addItem {
-        id
-        uuid
-        value
-    } 
-}`;
+const mutation = gql`mutation RemoveItem { removeItem }`;
 
-class AddItemList extends Component {
+class RemoveItemList extends Component {
   static propTypes = {
     by: PropTypes.number,
   };
@@ -27,7 +22,7 @@ class AddItemList extends Component {
 
     return (
       <div>
-        <button onClick={() => { mutate() }}>Add</button>
+        <button onClick={() => { mutate() }}>Remove</button>
       </div>
     );
   }
@@ -36,11 +31,11 @@ class AddItemList extends Component {
 export default graphql(mutation,
   {
     options: {
-      update: (proxy, { data: { addItem } }) => {
+      update: (proxy, { data: { removeItem } }) => {
         let data = proxy.readQuery({ query });
-        data.list = data.list.concat([addItem]);
+        data.list = data.list.filter(x => x.id !== removeItem);
         proxy.writeQuery({ query, data });
       },
     },
   }
-)(AddItemList);
+)(RemoveItemList);

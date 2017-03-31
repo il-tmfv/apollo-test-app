@@ -7,6 +7,7 @@ type Query {
 type Mutation {
   updateCount(by: Int!): Int!
   addItem: Item!
+  removeItem: String!
   editSecondItem: Item!
 }
 
