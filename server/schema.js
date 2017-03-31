@@ -1,34 +1,19 @@
-const GraphQLObjectType = require('graphql').GraphQLObjectType;
-const GraphQLSchema = require('graphql').GraphQLSchema;
-const GraphQLInt = require('graphql').GraphQLInt;
+const schema = `
+type Query {
+  count: Int!
+  list: [Item]
+}
 
-let count = 0;
+type Mutation {
+  updateCount(by: Int!): Int!
+  addItem: Item!
+  editSecondItem: Item!
+}
 
-let schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-      count: {
-        type: GraphQLInt,
-        resolve: function () {
-          return count;
-        }
-      }
-    }
-  }),
-  mutation: new GraphQLObjectType({
-    name: 'RootMutationType',
-    fields: {
-      updateCount: {
-        type: GraphQLInt,
-        description: 'Updates the count',
-        resolve: function () {
-          count += 1;
-          return count;
-        }
-      }
-    }
-  }),
-});
+type Item {
+  id: ID!
+  uuid: String!
+  value: Int!
+}`;
 
 module.exports = schema;

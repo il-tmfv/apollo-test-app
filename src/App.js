@@ -11,7 +11,8 @@ class App extends Component {
       <ApolloProvider client={GraphQlClient.getClient()}>
         <div className="App">
           <Show />
-          <Update />
+          <Update by={1}/>
+          <Update by={10}/>
         </div>
       </ApolloProvider>
     );
