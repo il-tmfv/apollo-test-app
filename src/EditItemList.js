@@ -10,10 +10,6 @@ const mutation = gql`mutation AddItem { editSecondItem {
 }`;
 
 class EditItemList extends Component {
-  static propTypes = {
-    by: PropTypes.number,
-  };
-
   render() {
     const { mutate } = this.props;
 
