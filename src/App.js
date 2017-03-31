@@ -4,6 +4,7 @@ import ShowList from './ShowList';
 import Update from './Update';
 import AddListItem from './AddItemList';
 import RemoveItemList from './RemoveItemList';
+import EditItemList from './EditItemList';
 import './App.css';
 import { ApolloProvider } from 'react-apollo';
 import GraphQlClient from './GraphQlClient';
@@ -19,6 +20,7 @@ class App extends Component {
           <br />
           <ShowList />
           <AddListItem />
+          <EditItemList />
           <RemoveItemList />
         </div>
       </ApolloProvider>

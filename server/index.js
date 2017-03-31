@@ -26,7 +26,7 @@ const rootValue = {
   },
   editSecondItem: () => {
     list[1].value += 1;
-    return list;
+    return list[1];
   },
   removeItem: () => {
     const removedId = list[list.length - 1].id;
